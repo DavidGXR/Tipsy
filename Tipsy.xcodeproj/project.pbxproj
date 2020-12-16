@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		702019FE2589226100E2E1D3 /* TipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702019FD2589226100E2E1D3 /* TipCollectionViewCell.swift */; };
 		707280042584C30A008897DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707280032584C30A008897DC /* AppDelegate.swift */; };
 		707280062584C30A008897DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707280052584C30A008897DC /* SceneDelegate.swift */; };
 		707280082584C30A008897DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707280072584C30A008897DC /* ViewController.swift */; };
@@ -16,6 +17,8 @@
 		707280132584C30A008897DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 707280112584C30A008897DC /* LaunchScreen.storyboard */; };
 		7072801E2584C30B008897DC /* TipsyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7072801D2584C30B008897DC /* TipsyTests.swift */; };
 		707280292584C30B008897DC /* TipsyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707280282584C30B008897DC /* TipsyUITests.swift */; };
+		70B66BB72586880E00423B7A /* RecentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B66BB62586880E00423B7A /* RecentsTableViewCell.swift */; };
+		70B66BBE2586960B00423B7A /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 70B66BAE2586862000423B7A /* Montserrat-Bold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		702019FD2589226100E2E1D3 /* TipCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCollectionViewCell.swift; sourceTree = "<group>"; };
 		707280002584C30A008897DC /* Tipsy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tipsy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		707280032584C30A008897DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		707280052584C30A008897DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +55,8 @@
 		707280242584C30B008897DC /* TipsyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TipsyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		707280282584C30B008897DC /* TipsyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsyUITests.swift; sourceTree = "<group>"; };
 		7072802A2584C30B008897DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70B66BAE2586862000423B7A /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		70B66BB62586880E00423B7A /* RecentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +107,16 @@
 		707280022584C30A008897DC /* Tipsy */ = {
 			isa = PBXGroup;
 			children = (
+				70B66BB4258687CA00423B7A /* Model */,
+				70B66BB3258687C400423B7A /* View */,
+				70B66BB2258687BA00423B7A /* Controller */,
 				707280032584C30A008897DC /* AppDelegate.swift */,
 				707280052584C30A008897DC /* SceneDelegate.swift */,
-				707280072584C30A008897DC /* ViewController.swift */,
-				707280092584C30A008897DC /* Main.storyboard */,
 				7072800F2584C30A008897DC /* Assets.xcassets */,
 				707280112584C30A008897DC /* LaunchScreen.storyboard */,
 				707280142584C30A008897DC /* Info.plist */,
 				7072800C2584C30A008897DC /* Tipsy.xcdatamodeld */,
+				70B66BAD258685FB00423B7A /* Fonts */,
 			);
 			path = Tipsy;
 			sourceTree = "<group>";
@@ -129,6 +137,47 @@
 				7072802A2584C30B008897DC /* Info.plist */,
 			);
 			path = TipsyUITests;
+			sourceTree = "<group>";
+		};
+		70B66BAD258685FB00423B7A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				70B66BAE2586862000423B7A /* Montserrat-Bold.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		70B66BB2258687BA00423B7A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				707280072584C30A008897DC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		70B66BB3258687C400423B7A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				70B66BB5258687FB00423B7A /* Generic UI */,
+				707280092584C30A008897DC /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		70B66BB4258687CA00423B7A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		70B66BB5258687FB00423B7A /* Generic UI */ = {
+			isa = PBXGroup;
+			children = (
+				70B66BB62586880E00423B7A /* RecentsTableViewCell.swift */,
+				702019FD2589226100E2E1D3 /* TipCollectionViewCell.swift */,
+			);
+			path = "Generic UI";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +286,7 @@
 				707280132584C30A008897DC /* LaunchScreen.storyboard in Resources */,
 				707280102584C30A008897DC /* Assets.xcassets in Resources */,
 				7072800B2584C30A008897DC /* Main.storyboard in Resources */,
+				70B66BBE2586960B00423B7A /* Montserrat-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +311,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70B66BB72586880E00423B7A /* RecentsTableViewCell.swift in Sources */,
 				707280082584C30A008897DC /* ViewController.swift in Sources */,
+				702019FE2589226100E2E1D3 /* TipCollectionViewCell.swift in Sources */,
 				707280042584C30A008897DC /* AppDelegate.swift in Sources */,
 				707280062584C30A008897DC /* SceneDelegate.swift in Sources */,
 				7072800E2584C30A008897DC /* Tipsy.xcdatamodeld in Sources */,
@@ -443,6 +495,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NASTCCUVNL;
 				INFOPLIST_FILE = Tipsy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -450,7 +503,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.David.Tipsy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -462,6 +515,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NASTCCUVNL;
 				INFOPLIST_FILE = Tipsy/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -469,7 +523,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.David.Tipsy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
