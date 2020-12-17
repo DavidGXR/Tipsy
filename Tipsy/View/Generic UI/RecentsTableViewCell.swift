@@ -21,6 +21,8 @@ class RecentsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         recentView.layer.cornerRadius = recentView.frame.height / 8
+        dateLabel.textColor = UIColor.universalYellow
+        timeLabel.textColor = UIColor.universalYellow
         //billAmountLabel.font = UIFont(name: "Montserrat-Bold", size: 10)
     }
 }

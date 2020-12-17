@@ -1,19 +1,19 @@
 //
-//  ViewController.swift
+//  HomeVC.swift
 //  Tipsy
 //
-//  Created by David Im on 12/12/20.
+//  Created by David Im on 12/17/20.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
-    
+class HomeVC: UIViewController {
+
     @IBOutlet weak var billAmountTextField: UITextField!
     @IBOutlet weak var calcButton: UIButton!
-    @IBOutlet weak var numberOfPeople: UILabel!
+    @IBOutlet weak var numberOfPeopleLabel: UILabel!
     @IBOutlet weak var stepper: UIStepper!
-    @IBOutlet weak var recentsTableView: UITableView!
+    @IBOutlet weak var recentTableView: UITableView!
     @IBOutlet weak var tipCollectionView: UICollectionView!
     
     private let tipButtonTitle = ["0%", "5%", "10%", "15%", "20%", "25%"]
@@ -27,7 +27,6 @@ class ViewController: UIViewController {
     private func customizeViews() {
         stepper.layer.cornerRadius = stepper.frame.height/7
         calcButton.layer.cornerRadius = calcButton.frame.height/7
-        
         billAmountTextField.attributedPlaceholder = NSAttributedString(string: "e.g. 168.8", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         billAmountTextField.keyboardType = .decimalPad
         billAmountTextField.layer.borderWidth = 1.0
@@ -35,8 +34,10 @@ class ViewController: UIViewController {
         billAmountTextField.layer.cornerRadius = billAmountTextField.frame.height/10
     }
         
-    @IBAction func stepper(_ sender: UIStepper) {
-        numberOfPeople.text = String(format: "%.0f", sender.value)
+    
+    @IBAction func stepperButtonTapped(_ sender: UIStepper) {
+        numberOfPeopleLabel.text = String(format: "%.0f", sender.value)
+
     }
     
     @IBAction func calculateButton(_ sender: UIButton) {
@@ -49,7 +50,7 @@ class ViewController: UIViewController {
 }
 
 //MARK: - Recent TableView
-extension ViewController:UITableViewDataSource, UITableViewDelegate {
+extension HomeVC:UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
@@ -66,7 +67,7 @@ extension ViewController:UITableViewDataSource, UITableViewDelegate {
 }
 
 //MARK: - Tip CollectionView
-extension ViewController:UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension HomeVC:UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tipButtonTitle.count
     }
@@ -83,4 +84,3 @@ extension ViewController:UICollectionViewDataSource, UICollectionViewDelegate, U
         return CGSize(width: width, height: 60)
     }
 }
-
