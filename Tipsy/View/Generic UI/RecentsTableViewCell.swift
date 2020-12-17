@@ -19,10 +19,10 @@ class RecentsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        recentView.backgroundColor = UIColor.recentsTableViewBackground
         recentView.layer.cornerRadius = recentView.frame.height / 8
         dateLabel.textColor = UIColor.universalYellow
         timeLabel.textColor = UIColor.universalYellow
-        //billAmountLabel.font = UIFont(name: "Montserrat-Bold", size: 10)
     }
 }

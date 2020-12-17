@@ -25,9 +25,9 @@ class ResultVC: UIViewController {
     }
     
     private func customizeViews() {
-        topView.backgroundColor = UIColor.greenBackgroundColor
+        topView.backgroundColor = UIColor.universalGreen
         recalculateButton.layer.cornerRadius = recalculateButton.frame.height/7
-        recalculateButton.backgroundColor = UIColor.greenBackgroundColor
+        recalculateButton.backgroundColor = UIColor.universalGreen
         recalculateButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
     }
     

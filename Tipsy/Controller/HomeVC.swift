@@ -27,6 +27,7 @@ class HomeVC: UIViewController {
     private func customizeViews() {
         stepper.layer.cornerRadius = stepper.frame.height/7
         calcButton.layer.cornerRadius = calcButton.frame.height/7
+        calcButton.backgroundColor = UIColor.universalGreen
         billAmountTextField.attributedPlaceholder = NSAttributedString(string: "e.g. 168.8", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         billAmountTextField.keyboardType = .decimalPad
         billAmountTextField.layer.borderWidth = 1.0

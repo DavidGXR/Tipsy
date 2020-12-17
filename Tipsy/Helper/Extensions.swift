@@ -10,8 +10,9 @@ import UIKit
 
 extension UIColor {
     
-    static let greenBackgroundColor = UIColor().colorFromHex("008854")
-    static let universalYellow      = UIColor().colorFromHex("FFCE00")
+    static let universalGreen                   = UIColor().colorFromHex("008854")
+    static let universalYellow                  = UIColor().colorFromHex("FFCE00")
+    static let recentsTableViewBackground       = UIColor().colorFromHex("262626")
     
     func colorFromHex (_ hex: String) -> UIColor {
         var hexString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
