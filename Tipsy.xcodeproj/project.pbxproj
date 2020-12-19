@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		702019FE2589226100E2E1D3 /* TipCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702019FD2589226100E2E1D3 /* TipCollectionViewCell.swift */; };
 		7036754C258B809700406824 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036754B258B809700406824 /* HomeVC.swift */; };
+		7036755F258B93C100406824 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036755E258B93C100406824 /* Calculator.swift */; };
+		70367564258B946E00406824 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367563258B946E00406824 /* Constants.swift */; };
+		70367569258B98F000406824 /* Tip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70367568258B98F000406824 /* Tip.swift */; };
 		706FCDEE258A73DA00C4B886 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706FCDED258A73DA00C4B886 /* Extensions.swift */; };
 		706FCDF6258A761800C4B886 /* ResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706FCDF5258A761800C4B886 /* ResultVC.swift */; };
 		707280042584C30A008897DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707280032584C30A008897DC /* AppDelegate.swift */; };
@@ -43,6 +46,9 @@
 /* Begin PBXFileReference section */
 		702019FD2589226100E2E1D3 /* TipCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCollectionViewCell.swift; sourceTree = "<group>"; };
 		7036754B258B809700406824 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		7036755E258B93C100406824 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		70367563258B946E00406824 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		70367568258B98F000406824 /* Tip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tip.swift; sourceTree = "<group>"; };
 		706FCDED258A73DA00C4B886 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		706FCDF5258A761800C4B886 /* ResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultVC.swift; sourceTree = "<group>"; };
 		707280002584C30A008897DC /* Tipsy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tipsy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				706FCDED258A73DA00C4B886 /* Extensions.swift */,
+				70367563258B946E00406824 /* Constants.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -181,6 +188,8 @@
 		70B66BB4258687CA00423B7A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7036755E258B93C100406824 /* Calculator.swift */,
+				70367568258B98F000406824 /* Tip.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -326,10 +335,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				70B66BB72586880E00423B7A /* RecentsTableViewCell.swift in Sources */,
+				70367569258B98F000406824 /* Tip.swift in Sources */,
 				706FCDF6258A761800C4B886 /* ResultVC.swift in Sources */,
 				7036754C258B809700406824 /* HomeVC.swift in Sources */,
 				702019FE2589226100E2E1D3 /* TipCollectionViewCell.swift in Sources */,
 				707280042584C30A008897DC /* AppDelegate.swift in Sources */,
+				70367564258B946E00406824 /* Constants.swift in Sources */,
+				7036755F258B93C100406824 /* Calculator.swift in Sources */,
 				707280062584C30A008897DC /* SceneDelegate.swift in Sources */,
 				7072800E2584C30A008897DC /* Tipsy.xcdatamodeld in Sources */,
 				706FCDEE258A73DA00C4B886 /* Extensions.swift in Sources */,

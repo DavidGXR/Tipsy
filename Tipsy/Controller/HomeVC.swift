@@ -16,12 +16,21 @@ class HomeVC: UIViewController {
     @IBOutlet weak var recentTableView: UITableView!
     @IBOutlet weak var tipCollectionView: UICollectionView!
     
-    private let tipButtonTitle = ["0%", "5%", "10%", "15%", "20%", "25%"]
+    private var tipButtonTitle = [Tip(title: "0%", status: false),
+                                  Tip(title: "5%", status: false),
+                                  Tip(title: "10%", status: false),
+                                  Tip(title: "15%", status: false),
+                                  Tip(title: "20%", status: false),
+                                  Tip(title: "25%", status: false),]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeViews()
         
+    }
+    
+    deinit {
+        print("HomeVC deinit")
     }
 
     private func customizeViews() {
@@ -35,10 +44,8 @@ class HomeVC: UIViewController {
         billAmountTextField.layer.cornerRadius = billAmountTextField.frame.height/10
     }
         
-    
     @IBAction func stepperButtonTapped(_ sender: UIStepper) {
         numberOfPeopleLabel.text = String(format: "%.0f", sender.value)
-
     }
     
     @IBAction func calculateButton(_ sender: UIButton) {
@@ -57,7 +64,7 @@ extension HomeVC:UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "recentCell") as! RecentsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: C.recentsCell) as! RecentsTableViewCell
         
         return cell
     }
@@ -68,20 +75,37 @@ extension HomeVC:UITableViewDataSource, UITableViewDelegate {
 }
 
 //MARK: - Tip CollectionView
-extension HomeVC:UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension HomeVC:UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, TipCollectionViewProtocol {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tipButtonTitle.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let tipCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tipCell", for: indexPath) as! TipCollectionViewCell
-        tipCell.tipButton.setTitle(tipButtonTitle[indexPath.row], for: .normal)
+        let tipCell = collectionView.dequeueReusableCell(withReuseIdentifier: C.tipCell, for: indexPath) as! TipCollectionViewCell
+        tipCell.tipButton.setTitle(tipButtonTitle[indexPath.row].title, for: .normal)
+        tipCell.tipButton.backgroundColor = tipButtonTitle[indexPath.row].status ? UIColor.universalGreen : UIColor.black
+        
+        tipCell.indexPath = [indexPath]
+        tipCell.index = indexPath.row
+        tipCell.tipCollectionViewDelegation = self
         
         return tipCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.view.bounds.size.width/3
+        let width = (self.view.bounds.size.width/3) 
         return CGSize(width: width, height: 60)
     }
+    
+    func tipButtonTap(indexPath: [IndexPath], index:Int) {
+        if tipButtonTitle[index].status == false {
+            tipButtonTitle[index].status = true
+            tipCollectionView.reloadItems(at: indexPath)
+        }else{
+            tipButtonTitle[index].status = false
+            tipCollectionView.reloadItems(at: indexPath)
+        }
+    }
+
 }

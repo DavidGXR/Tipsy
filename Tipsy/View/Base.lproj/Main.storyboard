@@ -83,7 +83,7 @@
                                                     <segue destination="hpS-OM-ozN" kind="presentation" id="bd6-VC-B5G"/>
                                                 </connections>
                                             </button>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="460-oP-hmJ">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="460-oP-hmJ">
                                                 <rect key="frame" x="20" y="132" width="374" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -104,18 +104,19 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tCe-Qo-Q6z">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="81" height="60.5"/>
+                                                                    <rect key="frame" x="-14" y="-3" width="69" height="66.5"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="44"/>
                                                                     <state key="normal" title="0%">
                                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="tipButtonTap:" destination="HmM-TF-1ai" eventType="touchUpInside" id="YlJ-Pm-ejx"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="tCe-Qo-Q6z" firstAttribute="top" secondItem="4Ak-b3-zra" secondAttribute="top" id="Ftk-t8-Nf6"/>
-                                                                <constraint firstAttribute="trailing" secondItem="tCe-Qo-Q6z" secondAttribute="trailing" id="OSt-OE-kXW"/>
-                                                                <constraint firstItem="tCe-Qo-Q6z" firstAttribute="leading" secondItem="4Ak-b3-zra" secondAttribute="leading" id="Ubb-EG-TJJ"/>
-                                                                <constraint firstAttribute="bottom" secondItem="tCe-Qo-Q6z" secondAttribute="bottom" id="f8e-Q1-YSg"/>
+                                                                <constraint firstItem="tCe-Qo-Q6z" firstAttribute="centerY" secondItem="4Ak-b3-zra" secondAttribute="centerY" id="XYo-X3-aej"/>
+                                                                <constraint firstItem="tCe-Qo-Q6z" firstAttribute="centerX" secondItem="4Ak-b3-zra" secondAttribute="centerX" constant="-20" id="tkU-LR-TVi"/>
                                                             </constraints>
                                                         </collectionViewCellContentView>
                                                         <connections>
@@ -124,8 +125,8 @@
                                                     </collectionViewCell>
                                                 </cells>
                                                 <connections>
-                                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="pt8-kt-fOx"/>
-                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="vO9-d6-G8F"/>
+                                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="GXh-KB-htP"/>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="c96-u8-jPC"/>
                                                 </connections>
                                             </collectionView>
                                         </subviews>
