@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TipCollectionViewProtocol: class {
-    func tipButtonTap(indexPath: [IndexPath], index:Int)
+    func tipButtonTap(indexPath: [IndexPath], index:Int, tipButton:UIButton, sender:UIButton)
 }
 
 class TipCollectionViewCell: UICollectionViewCell {
@@ -23,6 +23,6 @@ class TipCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func tipButtonTap(_ sender: UIButton) {
-        tipCollectionViewDelegation?.tipButtonTap(indexPath: indexPath!, index: index ?? 0)
+        tipCollectionViewDelegation?.tipButtonTap(indexPath: indexPath!, index: index ?? 0, tipButton: tipButton, sender: sender)
     }
 }

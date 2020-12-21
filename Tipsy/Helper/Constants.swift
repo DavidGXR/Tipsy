@@ -10,4 +10,5 @@ import Foundation
 struct C {
     static let tipCell          = "tipCell"
     static let recentsCell      = "recentCell"
+    static let segueToResultVC  = "resultVC"
 }

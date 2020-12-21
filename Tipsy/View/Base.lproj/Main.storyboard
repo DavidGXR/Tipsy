@@ -80,7 +80,8 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="hpS-OM-ozN" kind="presentation" id="bd6-VC-B5G"/>
+                                                    <action selector="calculateButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fgG-C4-SXD"/>
+                                                    <segue destination="hpS-OM-ozN" kind="presentation" identifier="resultVC" id="Tzj-JB-h8C"/>
                                                 </connections>
                                             </button>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="460-oP-hmJ">
@@ -311,7 +312,7 @@
         <!--ResultVC-->
         <scene sceneID="DKd-cq-1GF">
             <objects>
-                <viewController id="hpS-OM-ozN" customClass="ResultVC" customModule="Tipsy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="resultVC" id="hpS-OM-ozN" customClass="ResultVC" customModule="Tipsy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VPE-qj-3mt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -339,11 +340,29 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bfz-84-KaL">
+                                                <rect key="frame" x="359" y="10" width="35" height="35"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="35" id="M7f-e2-7dU"/>
+                                                    <constraint firstAttribute="height" constant="35" id="bTg-qX-zjJ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="tintColor" red="0.0" green="0.99607843139999996" blue="0.61568627450000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" image="plus" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="medium"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addHistoryButton:" destination="hpS-OM-ozN" eventType="touchUpInside" id="em4-SX-gqa"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                         <constraints>
                                             <constraint firstItem="dRb-Ht-vsj" firstAttribute="centerX" secondItem="nRb-jA-WvG" secondAttribute="centerX" id="3SM-1O-Y11"/>
+                                            <constraint firstItem="Bfz-84-KaL" firstAttribute="top" secondItem="nRb-jA-WvG" secondAttribute="top" constant="10" id="6YH-kJ-flm"/>
                                             <constraint firstItem="dRb-Ht-vsj" firstAttribute="centerY" secondItem="nRb-jA-WvG" secondAttribute="centerY" id="Dxe-5a-RZI"/>
+                                            <constraint firstAttribute="trailing" secondItem="Bfz-84-KaL" secondAttribute="trailing" constant="20" id="bfG-Nr-oRo"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TzM-in-QKb">
@@ -392,6 +411,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="Bfz-84-KaL" id="QyG-qN-8wB"/>
                         <outlet property="recalculateButton" destination="ocH-4d-Oy7" id="a98-ky-aAE"/>
                         <outlet property="splitAndTip" destination="OGt-Ng-n4A" id="tLJ-na-nKJ"/>
                         <outlet property="topView" destination="nRb-jA-WvG" id="RUz-dy-z23"/>
@@ -428,6 +448,7 @@
     </scenes>
     <resources>
         <image name="location" width="1024" height="1024"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

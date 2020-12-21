@@ -16,6 +16,7 @@ class HomeVC: UIViewController {
     @IBOutlet weak var recentTableView: UITableView!
     @IBOutlet weak var tipCollectionView: UICollectionView!
     
+    private var calculator = Calculator()
     private var tipButtonTitle = [Tip(title: "0%", status: false),
                                   Tip(title: "5%", status: false),
                                   Tip(title: "10%", status: false),
@@ -25,36 +26,45 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customizeViews()
         
+        customizeViews()
+        validateTextField()
     }
     
-    deinit {
-        print("HomeVC deinit")
-    }
-
     private func customizeViews() {
-        stepper.layer.cornerRadius = stepper.frame.height/7
-        calcButton.layer.cornerRadius = calcButton.frame.height/7
-        calcButton.backgroundColor = UIColor.universalGreen
-        billAmountTextField.attributedPlaceholder = NSAttributedString(string: "e.g. 168.8", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        billAmountTextField.keyboardType = .decimalPad
-        billAmountTextField.layer.borderWidth = 1.0
-        billAmountTextField.layer.borderColor = UIColor.white.cgColor
-        billAmountTextField.layer.cornerRadius = billAmountTextField.frame.height/10
+        stepper.layer.cornerRadius                  = stepper.frame.height/7
+        customizeCalculateButton(status: false)
+        calcButton.layer.cornerRadius               = calcButton.frame.height/7
+        calcButton.backgroundColor                  = UIColor.universalGreen
+        billAmountTextField.attributedPlaceholder   = NSAttributedString(string: "e.g. 168.8", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        billAmountTextField.keyboardType            = .decimalPad
+        billAmountTextField.layer.borderWidth       = 1.0
+        billAmountTextField.layer.borderColor       = UIColor.white.cgColor
+        billAmountTextField.layer.cornerRadius      = billAmountTextField.frame.height/10
     }
         
     @IBAction func stepperButtonTapped(_ sender: UIStepper) {
         numberOfPeopleLabel.text = String(format: "%.0f", sender.value)
+        billAmountTextField.resignFirstResponder()
     }
     
     @IBAction func calculateButton(_ sender: UIButton) {
+        if let bill = billAmountTextField.text, let numberOfPeople = numberOfPeopleLabel.text {
+            calculator.calculateTip(billInput: bill, people: numberOfPeople)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == C.segueToResultVC {
+            let resultVC        = segue.destination as! ResultVC
+            resultVC.totalSplit = calculator.getSplit()
+            resultVC.splitInfo  = calculator.splitInformation()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         billAmountTextField.resignFirstResponder()
     }
-    
 }
 
 //MARK: - Recent TableView
@@ -98,14 +108,40 @@ extension HomeVC:UICollectionViewDataSource, UICollectionViewDelegate, UICollect
         return CGSize(width: width, height: 60)
     }
     
-    func tipButtonTap(indexPath: [IndexPath], index:Int) {
+    func tipButtonTap(indexPath: [IndexPath], index:Int, tipButton: UIButton, sender:UIButton) {
         if tipButtonTitle[index].status == false {
             tipButtonTitle[index].status = true
             tipCollectionView.reloadItems(at: indexPath)
+            billAmountTextField.resignFirstResponder()
+            calculator.getTip(inputTip: tipButton.currentTitle!)
         }else{
             tipButtonTitle[index].status = false
             tipCollectionView.reloadItems(at: indexPath)
         }
     }
+}
 
+//MARK: - TextField Validation
+extension HomeVC {
+    private func validateTextField() {
+        billAmountTextField.addTarget(self, action: #selector(emptyTextFieldCheck), for: .editingChanged)
+    }
+    
+    @objc private func emptyTextFieldCheck() {
+        if let bill = billAmountTextField.text, !bill.isEmpty {
+            customizeCalculateButton(status: true)
+        }else{
+            customizeCalculateButton(status: false)
+        }
+    }
+    
+    private func customizeCalculateButton(status: Bool) {
+        if status == true {
+            calcButton.isUserInteractionEnabled = true
+            calcButton.alpha = 1
+        }else{
+            calcButton.isUserInteractionEnabled = false
+            calcButton.alpha = 0.5
+        }
+    }
 }
