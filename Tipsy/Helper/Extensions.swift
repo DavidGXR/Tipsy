@@ -34,3 +34,11 @@ extension UIColor {
                             alpha:  1)
     }
 }
+
+extension UIAlertController {
+    func howToEnableLocationService() {
+        let alertBox = UIAlertController(title: "You Can Enable Location Service Later", message: "You can enable location service later by going to: Setting -> Privacy -> Location Services -> Find \"Tipsy\" -> Allow Location Access", preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertBox.addAction(okButton)
+    }
+}

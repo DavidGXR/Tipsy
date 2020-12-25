@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class HomeVC: UIViewController {
 
@@ -16,19 +17,22 @@ class HomeVC: UIViewController {
     @IBOutlet weak var recentTableView: UITableView!
     @IBOutlet weak var tipCollectionView: UICollectionView!
     
-    private var calculator = Calculator()
+    private var calculator  = Calculator()
+    private var dataStorage = DataStorage()
     private var tipButtonTitle = [Tip(title: "0%", status: false),
                                   Tip(title: "5%", status: false),
                                   Tip(title: "10%", status: false),
                                   Tip(title: "15%", status: false),
                                   Tip(title: "20%", status: false),
                                   Tip(title: "25%", status: false),]
+    private var recents = [History]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         customizeViews()
         validateTextField()
+        getDataFromStorage()
     }
     
     private func customizeViews() {
@@ -59,24 +63,38 @@ class HomeVC: UIViewController {
             let resultVC        = segue.destination as! ResultVC
             resultVC.totalSplit = calculator.getSplit()
             resultVC.splitInfo  = calculator.splitInformation()
+            resultVC.resultVCDelegate = self
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         billAmountTextField.resignFirstResponder()
     }
+    
+    //MARK: - Read Data from CoreData
+    private func getDataFromStorage() {
+        var revRecents = [History]()
+        dataStorage.getCoreDataDBPath()
+        revRecents.append(contentsOf: dataStorage.readData())
+        recents = revRecents.reversed()
+    }
 }
 
 //MARK: - Recent TableView
 extension HomeVC:UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return recents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: C.recentsCell) as! RecentsTableViewCell
+        let recentCell = tableView.dequeueReusableCell(withIdentifier: C.recentsCell) as! RecentsTableViewCell
+        recentCell.dateLabel.text           = recents[indexPath.row].date
+        recentCell.timeLabel.text           = recents[indexPath.row].time
+        recentCell.locationName.text        = recents[indexPath.row].location
+        recentCell.billAmountLabel.text     = recents[indexPath.row].split
+        recentCell.numberOfPeopleLabel.text = recents[indexPath.row].splitInformation
         
-        return cell
+        return recentCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -143,5 +161,13 @@ extension HomeVC {
             calcButton.isUserInteractionEnabled = false
             calcButton.alpha = 0.5
         }
+    }
+}
+
+//MARK: - ResultVCProtocol
+extension HomeVC:ResultVCProtocol {
+    func addHistoryButtonTapped() {
+        getDataFromStorage()
+        recentTableView.reloadData()
     }
 }
