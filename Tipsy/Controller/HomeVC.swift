@@ -122,20 +122,19 @@ extension HomeVC:UICollectionViewDataSource, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (self.view.bounds.size.width/3) 
+        let width = (self.view.bounds.size.width/3)-10
         return CGSize(width: width, height: 60)
     }
     
     func tipButtonTap(indexPath: [IndexPath], index:Int, tipButton: UIButton, sender:UIButton) {
-        if tipButtonTitle[index].status == false {
-            tipButtonTitle[index].status = true
-            tipCollectionView.reloadItems(at: indexPath)
-            billAmountTextField.resignFirstResponder()
-            calculator.getTip(inputTip: tipButton.currentTitle!)
-        }else{
-            tipButtonTitle[index].status = false
-            tipCollectionView.reloadItems(at: indexPath)
+        tipButtonTitle[index].status = true
+        calculator.getTip(inputTip: tipButton.currentTitle ?? "0%")
+        for element in 0...(tipButtonTitle.count-1) {
+            if (element != index){
+                tipButtonTitle[element].status = false
+            }
         }
+        tipCollectionView.reloadSections(IndexSet(integer: 0))
     }
 }
 
