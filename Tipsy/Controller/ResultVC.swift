@@ -23,6 +23,7 @@ class ResultVC: UIViewController {
     
     var totalSplit:String?
     var splitInfo:String?
+    var splitWithBill:String?
     weak var resultVCDelegate:ResultVCProtocol?
     
     private let dataStorage = DataStorage()
@@ -63,7 +64,7 @@ class ResultVC: UIViewController {
 //MARK: - CoreData
 extension ResultVC {
     private func saveDataAndDismiss() {
-        dataStorage.addHistory(totalSplit: totalSplit ?? "0.00", splitInfo: splitInfo ?? "(NO INFO)", location: currentLocation ?? "UNKNOWN LOCATION")
+        dataStorage.addHistory(totalSplit: splitWithBill ?? "0.00", splitInfo: splitInfo ?? "(NO INFO)", location: currentLocation ?? "UNKNOWN LOCATION")
         resultVCDelegate?.addHistoryButtonTapped()
         self.dismiss(animated: true, completion: nil)
     }

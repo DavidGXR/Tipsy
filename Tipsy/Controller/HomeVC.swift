@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import SwipeCellKit
 
 class HomeVC: UIViewController {
 
@@ -26,16 +27,25 @@ class HomeVC: UIViewController {
                                   Tip(title: "20%", status: false),
                                   Tip(title: "25%", status: false),]
     private var recents = [History]()
+    private var rawData = [History]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customizeViews()
+        setupViews()
         validateTextField()
         getDataFromStorage()
+        dataStorage.getCoreDataDBPath()
     }
     
-    private func customizeViews() {
+    private func getDataFromStorage() {
+        rawData = dataStorage.readData(getAll: true)
+        rawData.sort{"\($0.date) \($0.time)" > "\($1.date) \($1.time)"}
+        //rawData.sort(by: {$0.time! > $1.time!})
+        recents.append(contentsOf: rawData)
+    }
+    
+    private func setupViews() {
         stepper.layer.cornerRadius                  = stepper.frame.height/7
         customizeCalculateButton(status: false)
         calcButton.layer.cornerRadius               = calcButton.frame.height/7
@@ -60,9 +70,11 @@ class HomeVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == C.segueToResultVC {
-            let resultVC        = segue.destination as! ResultVC
-            resultVC.totalSplit = calculator.getSplit()
-            resultVC.splitInfo  = calculator.splitInformation()
+            let resultVC            = segue.destination as! ResultVC
+            resultVC.totalSplit     = calculator.getSplit()
+            resultVC.splitWithBill  = calculator.getSplitWithBill()
+            resultVC.splitInfo      = calculator.splitInformation()
+            
             resultVC.resultVCDelegate = self
         }
     }
@@ -70,18 +82,11 @@ class HomeVC: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         billAmountTextField.resignFirstResponder()
     }
-    
-    //MARK: - Read Data from CoreData
-    private func getDataFromStorage() {
-        var revRecents = [History]()
-        dataStorage.getCoreDataDBPath()
-        revRecents.append(contentsOf: dataStorage.readData())
-        recents = revRecents.reversed()
-    }
 }
 
 //MARK: - Recent TableView
 extension HomeVC:UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recents.count
     }
@@ -93,12 +98,39 @@ extension HomeVC:UITableViewDataSource, UITableViewDelegate {
         recentCell.locationName.text        = recents[indexPath.row].location
         recentCell.billAmountLabel.text     = recents[indexPath.row].split
         recentCell.numberOfPeopleLabel.text = recents[indexPath.row].splitInformation
-        
+        recentCell.delegate = self
         return recentCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
+    }
+}
+
+//MARK: - SwipeTableViewCell
+extension HomeVC: SwipeTableViewCellDelegate {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            self.dataStorage.deleteData(dataToBeDeleted: self.recents[indexPath.row])
+            self.recents.remove(at: indexPath.row)
+            
+            DispatchQueue.main.async {
+                self.recentTableView.reloadData()
+            }
+        }
+        deleteAction.image = UIImage(named: "delete")
+
+        return [deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .destructive
+        options.transitionStyle = .border
+        return options
     }
 }
 
@@ -166,7 +198,8 @@ extension HomeVC {
 //MARK: - ResultVCProtocol
 extension HomeVC:ResultVCProtocol {
     func addHistoryButtonTapped() {
-        getDataFromStorage()
+        let latestData = dataStorage.readData(getAll: false, allElementsCount: rawData.count+1)
+        recents.insert(contentsOf: latestData, at: 0)
         recentTableView.reloadData()
     }
 }

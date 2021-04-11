@@ -1,0 +1,6 @@
+framework module Pods_TipsyTests {
+  umbrella header "Pods-TipsyTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -21,19 +21,37 @@ struct DataStorage {
         }
     }
     
-    func readData() -> [History] {
+    func readData(getAll: Bool, allElementsCount: Int = 0) -> [History] {
         let callRequest: NSFetchRequest<History> = History.fetchRequest()
         var result = [History]()
-        do{
-            result = try context.fetch(callRequest)
-        }catch{
-            print("Error fetching data from persistent container")
+        
+        if getAll {
+            do{
+                result = try context.fetch(callRequest)
+                
+            }catch{
+                print("Error fetching data from persistent container")
+            }
+        } else {
+            do{
+                callRequest.fetchLimit = 1
+                callRequest.fetchOffset = allElementsCount - 1 // it means skip the amount of (allElementsCount - 1) count from top
+                result = try context.fetch(callRequest)
+                
+            }catch{
+                print("Error fetching data from persistent container")
+            }
         }
         return result
     }
     
+    func deleteData(dataToBeDeleted: History) {
+        context.delete(dataToBeDeleted)
+        saveData()
+    }
+    
     func getCoreDataDBPath() {
-            let path = FileManager
+        let path = FileManager
                 .default
                 .urls(for: .applicationSupportDirectory, in: .userDomainMask)
                 .last?
@@ -41,7 +59,7 @@ struct DataStorage {
                 .replacingOccurrences(of: "file://", with: "")
                 .removingPercentEncoding
 
-            print("Core Data DB Path :: \(path ?? "Not found")")
+        print("Core Data DB Path :: \(path ?? "Not found")")
     }
 }
 
@@ -58,7 +76,7 @@ extension DataStorage {
     private func getTime() -> String {
         let time              = Date()
         let formatter         = DateFormatter()
-        formatter.dateFormat  = "h:mm a"
+        formatter.dateFormat  = "h:mm:ss a"
         formatter.amSymbol    = "AM"
         formatter.pmSymbol    = "PM"
         let currentTime       = formatter.string(from: time)

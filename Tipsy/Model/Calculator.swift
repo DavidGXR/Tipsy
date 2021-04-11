@@ -34,9 +34,17 @@ struct Calculator {
     
     func getSplit() -> String {
         if billWithTip.truncatingRemainder(dividingBy: numberOfPeople) == 0 {
-            return String(format: "%.0f", split)
+            return (String(format: "%.0f", split))
         }else{
-            return String(format: "%.2f", split)
+            return (String(format: "%.2f", split))
+        }
+    }
+    
+    func getSplitWithBill() -> String {
+        if billWithTip.truncatingRemainder(dividingBy: numberOfPeople) == 0 {
+            return "\(String(format: "%.0f", split))/\(billWithTip)"
+        }else{
+            return "\(String(format: "%.2f", split))/\(billWithTip)"
         }
     }
     

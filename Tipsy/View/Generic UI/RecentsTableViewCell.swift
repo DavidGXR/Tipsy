@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class RecentsTableViewCell: UITableViewCell {
+class RecentsTableViewCell: SwipeTableViewCell {
 
     @IBOutlet weak var recentView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
@@ -24,5 +25,6 @@ class RecentsTableViewCell: UITableViewCell {
         recentView.layer.cornerRadius = recentView.frame.height / 8
         dateLabel.textColor = UIColor.universalYellow
         timeLabel.textColor = UIColor.universalYellow
+        billAmountLabel.adjustsFontSizeToFitWidth = true
     }
 }
